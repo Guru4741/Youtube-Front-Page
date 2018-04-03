@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tabs</title>
+</head>
+<style type="text/css">
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+body {
+  font: normal 16px/1.5 Helvetica, sans-serif;
+  background: linear-gradient(to right, #6814cd 0%, #3163f3 100%);
+}
+
+.tabs-container {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 25px;
+}
+
+.tabs {
+  display: flex;
+}
+
+.tabs li:not(:last-child) {
+  margin-right: 7px;
+}
+
+.tabs li a {
+  display: block;
+  position: relative;
+  top: 4px;
+  padding: 10px 25px;
+  border-radius: 2px 2px 0 0;
+  background: white;
+  opacity: 0.7;
+  transition: all 0.1s ease-in-out;
+}
+
+.tabs li.active a,
+.tabs li a:hover {
+  opacity: 1;
+  top: 0;
+}
+
+.tabs-content {
+  position: relative;
+  z-index: 2;
+  padding: 25px;
+  border-radius: 0 4px 4px 4px;
+  background: white;
+}
+
+.tabs-panel {
+  display: none;
+}
+
+.tabs-panel.active {
+  display: block;
+}
+
+.tabs-panel p + div {
+  margin-top: 15px;
+}
+
+@media screen and (max-width: 600px) {
+  .tabs {
+    flex-direction: column;
+  }
+
+  .tabs li {
+    width: 100%;
+  }
+
+  .tabs li:not(:last-child) {
+    margin-right: 0;
+  }
+
+  .tabs li a {
+    border-radius: 0;
+    opacity: 1;
+    top: 0;
+  }
+
+  .tabs li.active a::before {
+    content: "•";
+    padding-right: 5px;
+  }
+
+  .tabs-content {
+    border-radius: 0;
+  }
+}
+
+</style>
+<body>
+	<div class="tabs-container">
+  <ul class="tabs">
+    <li class="active">
+      <a href="">Part 1</a>
+    </li>
+    <li>
+      <a href="">Part 2</a>
+    </li>
+    <li>
+      <a href="">Part 3</a>
+    </li>
+  </ul>
+  <div class="tabs-content">
+    <div class="tabs-panel active" data-index="0">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra erat at dui dictum, ac semper ante blandit. Suspendisse eleifend felis augue, et egestas odio tempor sed. Quisque sed justo eget arcu viverra sodales. Suspendisse a venenatis
+        augue, imperdiet elementum lorem. Donec neque dui, fringilla vitae ultricies vel, scelerisque non ante. Aliquam erat volutpat. Donec erat velit, finibus at lobortis nec, venenatis ac ipsum. Proin blandit urna turpis, quis euismod dui elementum
+        quis. Vestibulum hendrerit eget est ornare sollicitudin. Cras sit amet mi ut dui venenatis maximus. Donec blandit libero risus, non cursus mauris dignissim a. Donec vitae risus condimentum, rhoncus nibh in, scelerisque massa. Vivamus semper laoreet
+        neque at molestie. Integer nulla nisl, accumsan convallis bibendum ac, suscipit ac leo. Nunc at odio interdum, interdum arcu eu, ullamcorper felis.</p>
+      <div style="position:relative;height:0;padding-bottom:56.21%"><iframe width="560" height="315" src="https://www.youtube.com/embed/sUI-XUD6WUY" style="position:absolute;width:100%;height:100%;left:0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+    </div>
+    <div class="tabs-panel" data-index="1">
+      <p>Nam auctor orci nec consectetur lacinia. Fusce finibus efficitur hendrerit. Maecenas sit amet turpis eget velit feugiat luctus. Quisque eu tristique urna, at rhoncus lectus. Nullam non leo quis urna euismod convallis at a nibh. Etiam et bibendum
+        sapien. Suspendisse potenti. Nulla et mauris lacinia tortor facilisis dapibus a id dolor. Fusce luctus sapien ac varius mattis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris posuere ipsum nibh, at scelerisque diam feugiat
+        eget.
+      </p>
+    </div>
+    <div class="tabs-panel" data-index="2">
+      <p>Mauris id justo accumsan, semper metus non, aliquam purus. Mauris nunc libero, dignissim sit amet est in, egestas molestie nunc. Mauris gravida vel tellus sit amet consequat. Maecenas malesuada varius nibh, vel feugiat enim convallis vitae. Suspendisse
+        et pharetra velit. Vestibulum in ex est. Vestibulum tempor interdum metus et malesuada. Nullam ornare mi elit, id scelerisque ante dictum in. Nullam id mauris erat. Nunc non imperdiet dui. Ut pellentesque ultrices tincidunt. Nulla ac diam id dolor
+        semper malesuada nec eu massa. Nam tortor magna, luctus a blandit vitae, aliquam et arcu. Aenean non vestibulum leo, in pellentesque odio.</p>
+    </div>
+  </div>
+</div>
+
+	<script type="text/javascript">
+		const tabLinks = document.querySelectorAll(".tabs a");
+const tabPanels = document.querySelectorAll(".tabs-panel");
+
+for (let el of tabLinks) {
+  el.addEventListener("click", e => {
+    e.preventDefault();
+
+    document.querySelector(".tabs li.active").classList.remove("active");
+    document.querySelector(".tabs-panel.active").classList.remove("active");
+
+    const parentListItem = el.parentElement;
+    parentListItem.classList.add("active");
+    const index = [...parentListItem.parentElement.children].indexOf(parentListItem);
+
+    const panel = [...tabPanels].filter(el => el.getAttribute("data-index") == index);
+    panel[0].classList.add("active");
+    });
+  }
+	</script>
+</body>
+</html>
